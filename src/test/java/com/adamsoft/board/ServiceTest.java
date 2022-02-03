@@ -3,10 +3,14 @@ package com.adamsoft.board;
 import com.adamsoft.board.dto.BoardDTO;
 import com.adamsoft.board.dto.PageRequestDTO;
 import com.adamsoft.board.dto.PageResultDTO;
+import com.adamsoft.board.dto.ReplyDTO;
 import com.adamsoft.board.service.BoardService;
+import com.adamsoft.board.service.ReplyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 public class ServiceTest {
@@ -27,7 +31,7 @@ public class ServiceTest {
         System.out.println(bno);
     }
 
-    @Test
+    //@Test
     public void testList() {
 
         //1페이지 10개
@@ -64,5 +68,14 @@ public class ServiceTest {
         boardService.modify(boardDTO);
     }
 
+    @Autowired
+    private ReplyService replyService;
+
+    @Test
+    public void testGetList() {
+        Long bno = 95L;//데이터베이스에 존재하는 번호
+        List<ReplyDTO> replyDTOList = replyService.getList(bno);
+        replyDTOList.forEach(replyDTO -> System.out.println(replyDTO));
+    }
 
 }
